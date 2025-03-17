@@ -11,6 +11,13 @@
 
     <div class="card-header">Liste des patients</div>
   <div class="card-body">
+   <form method="get" th:action="@{index}">
+
+<label>keyword:</label>
+     <input type="text" name="keyword" th:value="${keyword}">
+     <button type="submit" class="btn btn-info">checher</button>
+
+   </form>
     <table class="table">
       <thead>
       <tr>
@@ -30,13 +37,13 @@
     </table>
 
     <ul class="nav nav-pills">
-      <li th:each="p,status:${pages}">       <!--p====l'element et status.index === son indice dans le tableau-->
-                                      <!--pages le tableau d'int qui a nbretotalepageselem et rempli de 0
-                                      status contient autres element sur le tableau que index tel que size,count...-->
-        <!-- 'status' est une variable spéciale qui fournit des informations sur l'element courant  (comme l'index actuel) -->
-        <a th:href="@{/index(page=${status.index})}"
-            th:class="${currentpage==status.index}?'btn btn-info ms-1':'btn btn-outline-info ms-1'"
-           th:text="${status.index}" ></a>
+      <li th:each="p,item:${pages}">       <!--p====l'element et item.index === l'indice de l'item(l'element) dans le tableau-->
+                                      <!--pages le tableau d'int qui a nbretotalepages element et rempli de 0
+                                      item contient autres info sur le tableau que index tel que size,count...-->
+        <!-- 'item' est une variable spéciale qui fournit des informations sur l'element courant  (comme l'index actuel) -->
+        <a th:href="@{/index(page=${item.index},keyword=${keyword})}"
+            th:class="${numcurrentpage==item.index}?'btn btn-info ms-1':'btn btn-outline-info ms-1'"
+           th:text="${item.index}" ></a>
       </li>
     </ul>
   </div>

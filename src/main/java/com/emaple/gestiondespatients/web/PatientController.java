@@ -20,13 +20,15 @@ public class PatientController {
 
     @GetMapping("/index")
     public String index(Model model,
-                        @RequestParam(value = "page",defaultValue = "0") int numpage,
-                        @RequestParam(value = "size",defaultValue = "4") int pagesize) {
-        Page<Patient> pagepatients = patientRepository.findAll(PageRequest.of(numpage,pagesize));
+                        @RequestParam(name = "page",defaultValue = "0") int numpage,
+                        @RequestParam(name = "size",defaultValue = "4") int pagesize ,
+                        @RequestParam(name = "keyword",defaultValue = "") String  kw) {
+        Page<Patient> pagepatients = patientRepository.findByNomContains(kw,PageRequest.of(numpage,pagesize));
         model.addAttribute("pages",new int[pagepatients.getTotalPages()]);
        // Java initializes all elements of an int[] array to 0 by default.
         model.addAttribute("listepatients", pagepatients.getContent());
-model.addAttribute("currentpage",numpage);
+model.addAttribute("numcurrentpage",numpage);
+model.addAttribute("keyword",kw);
     return "patients";
 }
 
