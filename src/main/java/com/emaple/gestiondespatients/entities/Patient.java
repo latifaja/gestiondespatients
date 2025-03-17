@@ -19,7 +19,7 @@ import java.util.Date;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY )
     private Long id;
-    private String Name;
+    private String nom;
     private Date dateNaissance;
     private boolean malade;
     private int score;
