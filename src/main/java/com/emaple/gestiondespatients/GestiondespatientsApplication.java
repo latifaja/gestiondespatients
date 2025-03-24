@@ -37,9 +37,9 @@ public class GestiondespatientsApplication implements CommandLineRunner {
 
 
 
-        patientRepository.save( new Patient(null,"Mohammed",new Date(),false , 334));
-        patientRepository.save( new Patient(null,"Hanane",new Date(),false , 4321));
-        patientRepository.save( new Patient(null,"Imane",new Date(),false , 344));
+//        patientRepository.save( new Patient(null,"Mohammed",new Date(),false , 334));
+//        patientRepository.save( new Patient(null,"Hanane",new Date(),false , 4321));
+//        patientRepository.save( new Patient(null,"Imane",new Date(),false , 344));
 
 
     }
