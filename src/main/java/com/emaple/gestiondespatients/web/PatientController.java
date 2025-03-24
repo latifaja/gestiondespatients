@@ -37,5 +37,14 @@ public String delete(Long id,String keyword,int page) {
         return "redirect:/index?page="+page+"&keyword="+keyword;
 }
 
+    @GetMapping("/")
+    public String home() {
 
+        return "redirect:/index";
+    }
+    @GetMapping("/formPatients")
+public String formPatients(Model model){
+        model.addAttribute("patient",new Patient());
+        return "formPatients";
+}
 }
