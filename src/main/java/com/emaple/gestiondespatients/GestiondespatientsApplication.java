@@ -29,7 +29,7 @@ public class GestiondespatientsApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         Patient patient = new Patient();
         patient.setId(null);
-        patient.setNom("Mohammed");
+        patient.setNom("Mohamed");
         patient.setDateNaissance(new Date());
         patient.setMalade(false);
         patient.setScore(23);
