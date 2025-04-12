@@ -1,5 +1,7 @@
 package com.emaple.gestiondespatients.security;
 
+import com.emaple.gestiondespatients.security.services.UserDetailsServiceImpl;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,11 +19,13 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
+@AllArgsConstructor
 public class SecurityConfig {
-@Autowired
+
     private PasswordEncoder passwordEncoder;
 
-    @Bean
+    private UserDetailsServiceImpl userDetailsServiceImpl;
+   // @Bean
     public JdbcUserDetailsManager jdbcUserDetailsManager(DataSource dataSource) {
         return new JdbcUserDetailsManager(dataSource);
     }
@@ -44,6 +48,7 @@ public class SecurityConfig {
         //httpSecurity.authorizeHttpRequests().requestMatchers("/admin/**").hasRole("ADMIN");
         httpSecurity.authorizeHttpRequests().anyRequest().authenticated();
         httpSecurity.exceptionHandling().accessDeniedPage("/notAuthorized");
+        httpSecurity.userDetailsService(userDetailsServiceImpl);
         return httpSecurity.build();
     }
 

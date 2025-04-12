@@ -2,6 +2,7 @@ package com.emaple.gestiondespatients;
 
 import com.emaple.gestiondespatients.entities.Patient;
 import com.emaple.gestiondespatients.repository.PatientRepository;
+import com.emaple.gestiondespatients.security.services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -26,31 +27,31 @@ public class GestiondespatientsApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-//        Patient patient = new Patient();
-//        patient.setId(null);
-//        patient.setNon("Mohammed");
-//        patient.setDateNaissance(new Date());
-//        patient.setMalade(false);
-//        patient.setScore(23);
-//
-//
-//        Patient patient3 = Patient.builder()
-//                .non("Imane")
-//                .dateNaissance(new Date())
-//                .malade(true)
-//                .score(56)
-//                .build();
+        Patient patient = new Patient();
+        patient.setId(null);
+        patient.setNom("Mohammed");
+        patient.setDateNaissance(new Date());
+        patient.setMalade(false);
+        patient.setScore(23);
+
+
+        Patient patient3 = Patient.builder()
+                .nom("Imane")
+                .dateNaissance(new Date())
+                .malade(true)
+                .score(56)
+                .build();
 
 
 
-//        patientRepository.save( new Patient(null,"Mohammed",new Date(),false , 334));
-//        patientRepository.save( new Patient(null,"Hanane",new Date(),false , 4321));
-//        patientRepository.save( new Patient(null,"Imane",new Date(),false , 344));
+        patientRepository.save( new Patient(null,"Mohammed",new Date(),false , 334));
+        patientRepository.save( new Patient(null,"Hanane",new Date(),false , 4321));
+        patientRepository.save( new Patient(null,"Imane",new Date(),false , 344));
 
 
     }
 
-    @Bean
+    //@Bean
     CommandLineRunner commandLineRunner(JdbcUserDetailsManager jdbcUserDetailsManager) {
     PasswordEncoder passwordEncoder = passwordEncoder();
     return args -> {
@@ -76,6 +77,22 @@ public class GestiondespatientsApplication implements CommandLineRunner {
         );
     };
 
+    }
+
+    //@Bean
+    CommandLineRunner commandLineRunnerUserDetails(AccountService accountService) {
+        return args -> {
+            accountService.addNewRole("USER");
+            accountService.addNewRole("ADMIN");
+            accountService.addNewUser("user1", "1234", "1234", "user1@gmail.com");
+            accountService.addNewUser("user2", "1234", "1234", "user2@gmail.com");
+            accountService.addNewUser("admin", "1234", "1234", "admin@gmail.com");
+
+            accountService.addRoleToUser("user1", "USER");
+            accountService.addRoleToUser("user2", "USER");
+            accountService.addRoleToUser("admin", "USER");
+            accountService.addRoleToUser("admin", "ADMIN");
+        };
     }
 
     @Bean
