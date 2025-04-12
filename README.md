@@ -15,8 +15,6 @@
 - [Security](#security)
 - [Custom User Management](#custom-user-management)
 - [Setup and Running](#setup-and-running)
-- [Future Enhancements](#future-enhancements)
-- [Contributing](#contributing)
 
 ## Technologies
 - **Spring Boot**: Framework for building the application.
